@@ -71,7 +71,8 @@ class MyHomePage extends StatelessWidget {
                         ),
                         padding: EdgeInsets.all(10),
                         child: Text(
-                          transaction.amount.toString(),
+                          'R: ${transaction.amount}',
+                          // '\$ ${transaction.amount}', if you wnt to have dollar signs
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
