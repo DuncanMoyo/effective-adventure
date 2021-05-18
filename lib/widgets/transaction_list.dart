@@ -30,7 +30,7 @@ class TransactionList extends StatelessWidget {
                           ),
                           padding: EdgeInsets.all(10),
                           child: Text(
-                            'R: ${transactions[index].amount}',
+                            'R: ${transactions[index].amount.toStringAsFixed(2)}',
                             // '\$ ${transaction.amount}', if you wnt to have dollar signs
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
