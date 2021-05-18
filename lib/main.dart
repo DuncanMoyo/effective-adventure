@@ -29,7 +29,7 @@ class MyHomePage extends StatelessWidget {
     Transaction(
       id: 't2',
       title: 'Dress',
-      amount: 299,
+      amount: 299.43,
       date: DateTime.now(),
     ),
   ];
@@ -53,15 +53,29 @@ class MyHomePage extends StatelessWidget {
             ),
           ),
           Column(
-            children: transactions
-                .map(
-                  (transaction) => Card(
-                    child: Text(
-                      transaction.title,
-                    ),
+            children: transactions.map(
+              (transaction) {
+                return Card(
+                  child: Row(
+                    children: [
+                      Container(
+                        child: Text(
+                          transaction.amount.toString(),
+                        ),
+                      ),
+                      Column(
+                        children: [
+                          Text(transaction.title),
+                          Text(
+                            transaction.date.toString(),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
-                )
-                .toList(),
+                );
+              },
+            ).toList(),
           ),
         ],
       ),
