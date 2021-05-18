@@ -34,6 +34,8 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.stretch ,
         children: [
           Container(
             width: double.infinity,
@@ -45,6 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Card(
             child: Text('list of TXT'),
+            color: Colors.cyan,
           ),
         ],
       ),
