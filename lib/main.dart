@@ -1,6 +1,4 @@
-import './transaction.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,25 +18,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final List<Transaction> transactions = [
-    Transaction(
-      id: 't1',
-      title: 'Shoes',
-      amount: 699.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Dress',
-      amount: 299.43,
-      date: DateTime.now(),
-    ),
-  ];
-
+  
   // String titleInput;
   // String amountInput;
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -57,95 +39,7 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          Card(
-            elevation: 5,
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  TextField(
-                    decoration: InputDecoration(labelText: 'Title'),
-                    // onChanged: (value) {
-                    //   titleInput = value;
-                    // },
-                    controller: titleController,
-                  ),
-                  TextField(
-                    decoration: InputDecoration(labelText: 'Amount'),
-                    // onChanged: (value) => amountInput = value,
-                    controller: amountController,
-                  ),
-                  TextButton(
-                    // onPressed: () {
-                    //   print(titleInput);
-                    //   print(amountInput);
-                    // },
-                    onPressed: () {
-                      print(titleController.text);
-                      print(amountController.text);
-                    },
-                    child: Text(
-                      'Add Transaction',
-                      style: TextStyle(color: Colors.purple),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          Column(
-            children: transactions.map(
-              (transaction) {
-                return Card(
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 15,
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.purple,
-                            width: 2,
-                          ),
-                        ),
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          'R: ${transaction.amount}',
-                          // '\$ ${transaction.amount}', if you wnt to have dollar signs
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.purple,
-                          ),
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            transaction.title,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            DateFormat.yMMMMEEEEd().format(transaction.date),
-                            style: TextStyle(
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                );
-              },
-            ).toList(),
-          ),
+      
         ],
       ),
     );
