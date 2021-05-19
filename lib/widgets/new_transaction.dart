@@ -15,7 +15,6 @@ class _NewTransactionState extends State<NewTransaction> {
   final amountController = TextEditingController();
 
   void submitData() {
-
     final enteredTitle = titleController.text;
     final enteredAmount = double.parse(amountController.text);
 
@@ -37,34 +36,44 @@ class _NewTransactionState extends State<NewTransaction> {
       elevation: 5,
       child: Container(
         padding: EdgeInsets.all(10),
-        // fix column to avoid overflow 
+        // fix column to avoid overflow
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             TextField(
               decoration: InputDecoration(labelText: 'Title'),
-              // onChanged: (value) {
-              //   titleInput = value;
-              // },
               controller: titleController,
               onSubmitted: (_) => submitData(),
             ),
             TextField(
               decoration: InputDecoration(labelText: 'Amount'),
-              // onChanged: (value) => amountInput = value,
               controller: amountController,
               keyboardType: TextInputType.number,
               onSubmitted: (_) => submitData(),
             ),
-            TextButton(
-              // onPressed: () {
-              //   print(titleInput);
-              //   print(amountInput);
-              // },
+            Container(
+              height: 70,
+              child: Row(
+                children: [
+                  Text(
+                    'No Date Chosen',
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Choose Date',
+                      style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            ElevatedButton(
               onPressed: submitData,
               child: Text(
                 'Add Transaction',
-                style: TextStyle(color: Colors.purple),
               ),
             )
           ],
