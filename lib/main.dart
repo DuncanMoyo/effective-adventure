@@ -1,3 +1,5 @@
+// import 'package:flutter/services.dart';
+
 import './widgets/chart.dart';
 import './widgets/transaction_list.dart';
 import './models/transaction.dart';
@@ -6,6 +8,14 @@ import './widgets/new_transaction.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  // if you want to lock your device in potrait mode
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations(
+  //   [
+  //     DeviceOrientation.portraitUp,
+  //     DeviceOrientation.portraitDown,
+  //   ],
+  // );
   runApp(MyApp());
 }
 
@@ -45,20 +55,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _userTransactions = [
-    // Transaction(
-    //   id: 't1',
-    //   title: 'Shoes',
-    //   amount: 699.99,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Dress',
-    //   amount: 299.43,
-    //   date: DateTime.now(),
-    // ),
-  ];
+  final List<Transaction> _userTransactions = [];
 
   List<Transaction> get _recentTransactions {
     return _userTransactions.where(
@@ -134,8 +131,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Chart(_recentTransactions)),
             Container(
               height: (MediaQuery.of(context).size.height -
-                        appBar.preferredSize.height) *
-                    0.7,
+                      appBar.preferredSize.height) *
+                  0.7,
               child: TransactionList(
                 _userTransactions,
                 _deleteTransaction,
