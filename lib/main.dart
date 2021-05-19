@@ -72,7 +72,11 @@ class _MyHomePageState extends State<MyHomePage> {
     ).toList();
   }
 
-  void _addNewTransaction(String txtitle, double txamount, DateTime chosenDate,) {
+  void _addNewTransaction(
+    String txtitle,
+    double txamount,
+    DateTime chosenDate,
+  ) {
     final newTx = Transaction(
       title: txtitle,
       amount: txamount,
@@ -98,32 +102,45 @@ class _MyHomePageState extends State<MyHomePage> {
   void _deleteTransaction(String id) {
     setState(() {
       _userTransactions.removeWhere((tx) => tx.id == id);
-      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Expense Planner',
-          style: TextStyle(
-            fontFamily: 'Open Sans',
-          ),
+    final appBar = AppBar(
+      title: Text(
+        'Expense Planner',
+        style: TextStyle(
+          fontFamily: 'Open Sans',
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => _startAddNewTransaction(context),
-          )
-        ],
       ),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () => _startAddNewTransaction(context),
+        )
+      ],
+    );
+    return Scaffold(
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Chart(_recentTransactions),
-            TransactionList(_userTransactions, _deleteTransaction,),
+            Container(
+                height: (MediaQuery.of(context).size.height -
+                        appBar.preferredSize.height) *
+                    0.4,
+                child: Chart(_recentTransactions)),
+            Container(
+              height: (MediaQuery.of(context).size.height -
+                        appBar.preferredSize.height) *
+                    0.6,
+              child: TransactionList(
+                _userTransactions,
+                _deleteTransaction,
+              ),
+            ),
           ],
         ),
       ),
