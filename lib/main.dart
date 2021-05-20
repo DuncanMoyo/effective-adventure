@@ -1,3 +1,4 @@
+import 'dart:io';
 import './widgets/chart.dart';
 import './widgets/transaction_list.dart';
 import './models/transaction.dart';
@@ -114,9 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
 
     final txListWidget = Container(
-      height:
-          (mediaQuery.size.height - appBar.preferredSize.height) *
-              0.7,
+      height: (mediaQuery.size.height - appBar.preferredSize.height) * 0.7,
       child: TransactionList(
         _userTransactions,
         _deleteTransaction,
@@ -134,7 +133,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('Show Chart'),
-                  Switch(
+                  Switch.adaptive(
+                    //adaptive for iOs platforms
+                    activeColor: Theme.of(context).accentColor,
                     value: _showChart,
                     onChanged: (val) {
                       setState(() {
@@ -146,28 +147,30 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             if (!isLandscape)
               Container(
-                height: (mediaQuery.size.height -
-                        appBar.preferredSize.height) *
+                height: (mediaQuery.size.height - appBar.preferredSize.height) *
                     0.3,
                 child: Chart(_recentTransactions),
               ),
             if (!isLandscape) txListWidget,
-            if (isLandscape) _showChart
-                ? Container(
-                    height: (mediaQuery.size.height -
-                            appBar.preferredSize.height) *
-                        0.6,
-                    child: Chart(_recentTransactions),
-                  )
-                : txListWidget,
+            if (isLandscape)
+              _showChart
+                  ? Container(
+                      height: (mediaQuery.size.height -
+                              appBar.preferredSize.height) *
+                          0.6,
+                      child: Chart(_recentTransactions),
+                    )
+                  : txListWidget,
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _startAddNewTransaction(context),
-      ),
+      floatingActionButton: Platform.isIOS
+          ? Container()
+          : FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () => _startAddNewTransaction(context),
+            ),
     );
   }
 }
